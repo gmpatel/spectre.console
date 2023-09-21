@@ -19,13 +19,13 @@ public static partial class AnsiConsole
     /// Renders the specified <see cref="IRenderable"/> to the console.
     /// </summary>
     /// <param name="renderable">The object to render.</param>
-    public static void Write(IRenderable renderable)
+    public static string? Write(IRenderable renderable)
     {
         if (renderable is null)
         {
             throw new ArgumentNullException(nameof(renderable));
         }
 
-        Console.Write(renderable);
+        return Console.Write(renderable);
     }
 }

@@ -47,7 +47,7 @@ public class Recorder : IAnsiConsole, IDisposable
     }
 
     /// <inheritdoc/>
-    public void Write(IRenderable renderable)
+    public string? Write(IRenderable renderable)
     {
         if (renderable is null)
         {
@@ -56,7 +56,7 @@ public class Recorder : IAnsiConsole, IDisposable
 
         _recorded.Add(renderable);
 
-        _console.Write(renderable);
+        return _console.Write(renderable);
     }
 
     internal Recorder Clone(IAnsiConsole console)

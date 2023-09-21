@@ -33,11 +33,11 @@ internal sealed class AnsiConsoleFacade : IAnsiConsole
         }
     }
 
-    public void Write(IRenderable renderable)
+    public string? Write(IRenderable renderable)
     {
         lock (_renderLock)
         {
-            GetBackend().Write(renderable);
+            return GetBackend().Write(renderable);
         }
     }
 

@@ -25,13 +25,16 @@ internal sealed class AnsiConsoleBackend : IAnsiConsoleBackend
         }
     }
 
-    public void Write(IRenderable renderable)
+    public string? Write(IRenderable renderable)
     {
         var result = AnsiBuilder.Build(_console, renderable);
+
         if (result?.Length > 0)
         {
             _console.Profile.Out.Writer.Write(result);
             _console.Profile.Out.Writer.Flush();
         }
+
+        return result;
     }
 }

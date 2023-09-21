@@ -40,5 +40,5 @@ public interface IAnsiConsole
     /// Writes a <see cref="IRenderable"/> to the console.
     /// </summary>
     /// <param name="renderable">The <see cref="IRenderable"/> to write.</param>
-    void Write(IRenderable renderable);
+    string? Write(IRenderable renderable);
 }

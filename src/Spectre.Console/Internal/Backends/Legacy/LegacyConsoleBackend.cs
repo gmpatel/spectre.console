@@ -28,8 +28,10 @@ internal sealed class LegacyConsoleBackend : IAnsiConsoleBackend
         }
     }
 
-    public void Write(IRenderable renderable)
+    public string? Write(IRenderable renderable)
     {
+        var result = new StringBuilder();
+
         foreach (var segment in renderable.GetSegments(_console))
         {
             if (segment.IsControlCode)
@@ -42,8 +44,14 @@ internal sealed class LegacyConsoleBackend : IAnsiConsoleBackend
                 SetStyle(segment.Style);
             }
 
-            _console.Profile.Out.Writer.Write(segment.Text.NormalizeNewLines(native: true));
+            var output = segment.Text.NormalizeNewLines(native: true);
+
+            _console.Profile.Out.Writer.Write(output);
+
+            result.Append(output);
         }
+
+        return result.ToString();
     }
 
     private void SetStyle(Style style)
